@@ -7,7 +7,8 @@ import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/a
 
 import { AppComponent } from "./app.component";
 import { routes, navigatableComponents } from "./app.routing";
-
+import {tabsComponent} from './tabs/tabs.component'
+import {NewsDetailComponent} from './news-detail/news-detail.component';
 import {SideComponent} from "./sidedrawer/side.component";
 
 
@@ -23,6 +24,8 @@ import {SideComponent} from "./sidedrawer/side.component";
   ],
   declarations: [AppComponent,
     ...navigatableComponents, 
+    tabsComponent,
+    NewsDetailComponent
   ],
   bootstrap: [AppComponent]
 })

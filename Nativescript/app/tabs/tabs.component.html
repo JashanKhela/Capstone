@@ -1,27 +1,42 @@
 <TabView>
-    <StackLayout *tabItem="{title: 'News'}" >
+    <StackLayout *tabItem="{title: 'News'}" id = "news">
 
-            <!-- <Page xmlns:lv="nativescript-pro-ui/listview">
-        
-                <lv:RadListView id="listview" class="list-group"> 
-                        <lv:RadListView.listViewLayout>
-                            <lv:ListViewLinearLayout scrollDirection="Vertical"/>
-                        </lv:RadListView.listViewLayout>
-                        <lv:RadListView.itemTemplate  [item] = 'info'> -->
-                            <ListView [items]= "info">
-                                <ng-template let-item="item">
-                            <StackLayout class="list-group-item">
-                                <Label [text]="item.id " class="list-group-item-heading" ></Label>
-                                <Label [text]=" item.name" textWrap="true" class="list-group-item-text" ></Label>
-                            </StackLayout>
-                        </ng-template>
-                    </ListView>
-            <!-->trying to create a listview in the news tab. Just tryin to show an object created in 
-            components called info -->
+        <StackLayout id= "woman">
+        <Label text = "Smile Of the Future" id= "womantext"></Label>
+        <Image src= "~/images/big-woman.png"></Image>
+        </StackLayout>
+        <StackLayout>
+        <a href ="">
+            <Image src= "~/images/boxes1.png"></Image>
+        </a>
+        <a href ="">
+            <Image src= "~/images/boxes2.png"></Image>
+        </a>
+        </StackLayout>
+    
     </StackLayout>
-    <StackLayout *tabItem="{title: 'Info'}">        
+
+
+    <StackLayout *tabItem="{title: 'Info'}">   
+        <StackLayout>   
+                <ListView [items]= "News" class = "list-group" [class.selected]="item === selectedInfo"(tap)="onSelect(item)">
+                        <ng-template let-item="item" >
+                                <StackLayout orientation="horizontal">
+                                 <Image width="200px" height="300px" [src]="item.pic" id = "image"></Image>
+                            <StackLayout class="list-group-item" >
+                              <Label [text]="item.Topic" class="list-group-item-heading" id = "topic"></Label>
+                              <Label [text]="'Created by: ' + item.author"  class="list-group-item-text" ></Label>
+                                <Label  [text]="item.prev"  class="list-group-item-text" id = "prev"></Label>
+                                </StackLayout>
+                                </StackLayout>
+                            </ng-template>
+                        </ListView>
+                
+                        <app-news-detail [item]="selectedInfo"></app-news-detail>
+                
+        </StackLayout>
     </StackLayout>
     <StackLayout *tabItem="{title: 'Providers'}">
-        <Label text="Third tab item"></Label>
+        <Image></Image>
     </StackLayout>
 </TabView>
