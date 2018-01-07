@@ -1,14 +1,11 @@
 import {Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { Page } from "ui/page"; // to hide action bar
 import * as listViewModule from "tns-core-modules/ui/list-view";
-<<<<<<< HEAD
 import * as ImageModule from "tns-core-modules/ui/image";
 import { Image } from "tns-core-modules/ui/image";
 import { OnInit } from '@angular/core';
 import { Info} from './info';
-=======
-import {Input, ChangeDetectionStrategy} from '@angular/core';
->>>>>>> 7a7e72761adb01e6beac45cd6bde05a5dcad27f9
+//import {Input, ChangeDetectionStrategy} from '@angular/core';
 
 
 
