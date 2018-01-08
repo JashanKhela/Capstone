@@ -40,7 +40,7 @@ export class SideComponent implements AfterViewInit, OnInit {
     }
 
     public openDrawer() {
-        this.drawer.showDrawer();
+        this.drawer.toggleDrawerState();
     }
 
     public onCloseDrawerTap() {
