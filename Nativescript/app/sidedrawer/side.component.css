@@ -11,10 +11,12 @@ button {
 .drawerContentButton {
     margin: 10;
     horizontal-align: left;
+    background-color:rgb(182, 253, 1);
+    color:lightslategray;
 }
 
 .sideStackLayout {
-    background-color: gray;
+    background-color: rgb(66, 65, 65)
 }
 
 .sideTitleStackLayout {
@@ -28,5 +30,6 @@ button {
 }
 
 .sideLightGrayLabel {
-    background-color: lightgray;
+    background-color: gray;
+    color:black;
 }
