@@ -8,6 +8,7 @@ import { Info} from './info';
 
 
 
+
 export class news{
   constructor(
     public id: number,
