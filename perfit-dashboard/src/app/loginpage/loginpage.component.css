@@ -12,6 +12,10 @@ label{
 	color: #eee;
 }
 
+.title{
+	text-align: center;
+}
+
 .cont{
 	margin-top: 10em;
 	margin-bottom:20em;
@@ -47,7 +51,10 @@ input{
     height: 3em;
     width: 6em; 
     background-color: #eee;
-
     color: grey;
+}
+
+.button:hover{
+	background-color: rgb(155, 252, 27);
 }
 

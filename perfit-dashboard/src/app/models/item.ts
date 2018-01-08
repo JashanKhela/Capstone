@@ -1,4 +1,5 @@
 export interface Item{
+	
 	id?:string;
 	title?:string;
 	description?:string;
@@ -6,6 +7,9 @@ export interface Item{
 	permissions?:string;
 	time?:string;
 	datatype?:string;
-	file?:string;
+	url?: string;
+	name?: string;
 
 }
+
+

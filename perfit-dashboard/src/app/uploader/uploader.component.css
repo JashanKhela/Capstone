@@ -1,13 +1,12 @@
 body{
     background-color: #eee;
     color: grey;
-    height: 45em;
-
+    height: 100%;
+    position: relative;
 }
 
 h1{
     padding-top: 2em;
-
 }
 input[type=text] {
     width: 100%;
@@ -21,9 +20,12 @@ textarea[type=text] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    height: 4em;
+    height: 10em;
     min-height: 4em;
 }
+
+
+
 input[type=submit] {
     margin-top: 5em;
 }
@@ -36,9 +38,9 @@ select {
 
 }
 
-.button{
+.button1{
     height: 3em;
-    width: 5em; 
+    width: 7em; 
     background-color: rgba(0,0,0,0.78);
     color: #eee;
 }

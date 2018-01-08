@@ -2,7 +2,7 @@
 body{
 	background-color: #eee;
 	color: grey;
-	height: 45em;
+	height: 60em;
 
 }
 
@@ -13,7 +13,9 @@ li{
 
 
 .collection{
-	padding: 5em 5em;
+	padding-left: 4em;
+	padding-right: 4em;
+	padding-top: 2em;
 }
 
 
@@ -66,7 +68,6 @@ form{
 	 	color: grey;
 
 }
-
 
 input[type=text] {
     width: 100%;

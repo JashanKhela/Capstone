@@ -1,22 +1,23 @@
-<app-header></app-header>
 
- 
 <body>
 <div class="container">
   <div class="">
     <h1 class=""> Create a new post</h1> 
-    
+    <hr>
     <form (ngSubmit) ="onSubmit()" class="">
 
       <div class="">
         <label>Title</label>
-        <textarea type="text" placeholder="Add title" [(ngModel)]="item.title" name="title"></textarea>
+        <input type="text" placeholder="Add title" [(ngModel)]="item.title" name="title">
       </div>
       
+
       <div class="">
-        <label>Description</label>
-        <textarea class="description" type="text" placeholder="Add Description" [(ngModel)]="item.description" name="description"></textarea>
+        <label>description</label>
+        <label>  </label>
+        <textarea class="description" type="text" name="description" placeholder="Add description" (keyup)="updateOutput($event.target.value)" [(ngModel)]="item.description" ></textarea>
       </div>
+
 
       <div class="">
        <label>Permissions</label>
@@ -25,29 +26,39 @@
        <option>Dentists/Doctors only</option>
        </select>
        </div>
-      
-       <!-- file type -->
-      <!--
-       <div class="">
-       <label>Datatype</label>
-       <select type="text" placeholder="Add Datatype" [(ngModel)]="item.datatype"  name="datatype">
-       <option selected="selected" >None</option>
-       <option>PDF</option>
-       <option>Image - png</option>
-       <option>Image - jpg</option>
-       </select>
-       </div>
-      -->
-      
-       <!-- upload file -->
-       <!--
-        <label>Attachment</label>
-        <div class="">
-        <input type="file" accept="image/*" [(ngModel)]="item.file" id="file" >
-        </div>
-      -->
 
-         
+       <!-- file uploader -->
+        <div class="container">
+        <div class="box" *ngIf="currentUpload">
+          <progress class="progress is-success" min=1 max=100 value="{{ currentUpload?.progress }}"></progress>
+          Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+        </div>
+
+        <div class="box">
+          
+          <br>
+          <label>Single File Upload</label>
+          <label>
+            <input type="file" class="button" (change)="detectFiles($event)">
+          </label>
+          
+           <label>Multi File Upload</label>
+           <label>
+           <input type="file" class="button" (change)="detectFiles($event)" multiple>
+           </label>
+
+          <hr>
+          <label>Post preview</label>
+
+                <div [innerHtml]= "convertedText" ></div>
+
+
+        </div>
+        </div>
+       <!-- -->
+        
+
+
       <input type="submit" class="button">
       <div id="message">{{msg}}</div>
       <div id="message2">{{msg2}}</div>
@@ -56,6 +67,8 @@
 
   </div>
 </div>
-
+<br><br>
 </body>
+
+
 

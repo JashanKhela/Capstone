@@ -6,8 +6,9 @@
   	<ul *ngFor="let item of items" class="collection">
   		<li class="collection-item">
 			
-			<h1 class="item-title">{{ item.title }}</h1> 
-			<br><h3><div class="description"> {{ item.description }}</div></h3>
+			<h1 class="item-title">{{ item.title }}</h1> <hr>
+			<br><h3><div class="description"> {{ updateOutput(item.description) }}</div></h3>
+						<br><h3><div class="description" [innerHtml]= "convertedText"> </div></h3>
 			<div class="info">
 				<!--<br> <b>Datatype: </b> {{ item.datatype }}-->
 				<br> <b>Postedby: </b> {{ item.adminposted }}
