@@ -33,6 +33,8 @@ import { FirebaseApp } from 'angularfire2';
 // Http client (used for sending POST request for push ~Eric)
 import {HttpClientModule} from '@angular/common/http';
 
+
+
 export const firebaseConfig = {
       apiKey: "AIzaSyC6empcDciB_guvtZiNwFk7R-lTVThpPeQ",
       authDomain: "perfitdental-7951d.firebaseapp.com",
