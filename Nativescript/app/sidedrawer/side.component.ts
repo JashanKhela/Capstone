@@ -5,6 +5,7 @@ import { ActionItem } from "ui/action-bar";
 import { Observable } from "data/observable";
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-pro-ui/sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
+import { Switch } from "ui/switch";
 
 
 @Component({
@@ -14,7 +15,10 @@ import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
     styleUrls: ['side.component.css']
 })
 export class SideComponent implements AfterViewInit, OnInit {
+
+    firebase = require("nativescript-plugin-firebase");
     private _mainContentText: string;
+    public isProf: boolean = false;
 
     constructor(private _changeDetectionRef: ChangeDetectorRef) {
     }
@@ -28,7 +32,34 @@ export class SideComponent implements AfterViewInit, OnInit {
     }
 
     ngOnInit() {
-        this.mainContentText = "SideDrawer for NativeScript can be easily setup in the HTML definition of your page by defining tkDrawerContent and tkMainContent. The component has a default transition and position and also exposes notifications related to changes in its state. Swipe from left to open side drawer.";
+    }
+
+    notificationSwitch(args){
+        let pushSwitch = <Switch>args.object;
+        if(pushSwitch.checked){                       
+            this.firebase.subscribeToTopic("news");
+            if(this.isProf){
+                this.firebase.subscribeToTopic("prof");
+            }
+        }else{
+            this.firebase.unsubscribeFromTopic("news");
+            if(this.isProf){
+                this.firebase.unsubscribeFromTopic("prof");
+            }
+        }
+        console.log("Notifications switch on: "+pushSwitch.checked);
+    }
+
+    professionalSwitch(args){
+        let profSwitch = <Switch>args.object;        
+        if(profSwitch.checked){
+            this.isProf = true;
+            this.firebase.subscribeToTopic("prof");
+        }else{
+            this.isProf = false;
+            this.firebase.unsubscribeFromTopic("prof");
+        }
+        console.log("Professional switch on: "+profSwitch.checked);
     }
 
     get mainContentText() {

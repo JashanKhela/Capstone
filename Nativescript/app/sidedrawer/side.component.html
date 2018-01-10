@@ -9,7 +9,11 @@
         <StackLayout class="sideStackLayout">
             <StackLayout orientation="horizontal" horizontalAlignment="center">
                 <label text = "Dental Professional?"></label>
-                <switch></switch>
+                <switch (checkedChange) = "professionalSwitch($event)"></switch>
+            </StackLayout>
+            <StackLayout orientation="horizontal" horizontalAlignment="center">
+                <label text = "Push Notifications?"></label>
+                <switch  (checkedChange) = "notificationSwitch($event)" ></switch>
             </StackLayout>
             
             <Label text="Tab Selection" class="sideLabel sideLightGrayLabel"></Label>
