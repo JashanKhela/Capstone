@@ -37,16 +37,23 @@
         <div class="box">
           
           <br>
-          <label>Single File Upload</label>
+          <label>File Upload</label><br>
           <label>
             <input type="file" class="button" (change)="detectFiles($event)">
           </label>
-          
-           <label>Multi File Upload</label>
+<!--
+           <button class="button is-primary"
+              type="button"
+              [disabled]="!selectedFiles"
+              (click)="uploadSingle()">
+              Upload Single
+           </button>
+
+           <label>Multi File Upload</label><br><br>
            <label>
            <input type="file" class="button" (change)="detectFiles($event)" multiple>
            </label>
-
+-->
           <hr>
           <label>Post preview</label>
 
@@ -60,8 +67,8 @@
 
 
       <input type="submit" class="button">
-      <div id="message">{{msg}}</div>
-      <div id="message2">{{msg2}}</div>
+      <div id="message"></div>
+      <div id="message2"></div>
 
     </form>
 

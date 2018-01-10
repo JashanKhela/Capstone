@@ -5,7 +5,7 @@ import { ItemService } from '../services/item.service';
 import { Item } from '../models/item';
 import { MarkdownService } from '../services/markdown.service';
 import { Upload } from '../models/upload';
-
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -16,11 +16,15 @@ import { Upload } from '../models/upload';
 
 export class UploaderComponent implements OnInit {
  
+   basePath = 'uploads';
+   uploadfile = '';
+
    user:string;
-   msg = '';
-   msg2 = '';
    date = new Date();
    convertedText: string;
+   
+   fileurl = '';
+   filename = '';
   
   item: Item = {
   	title: '',
@@ -28,6 +32,7 @@ export class UploaderComponent implements OnInit {
     url: '',
   }
   
+  formsubmit: boolean;
   selectedFiles: FileList | null;
   currentUpload: Upload;
 
@@ -40,8 +45,7 @@ export class UploaderComponent implements OnInit {
     this.user = this.cookieService.get('username'); 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // updates markup text
   updateOutput(mdText: string){
@@ -51,72 +55,78 @@ export class UploaderComponent implements OnInit {
   detectFiles($event: Event) {
       this.selectedFiles = ($event.target as HTMLInputElement).files;
   }
+  
+  public pushUpload(upload: Upload) {
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot: firebase.storage.UploadTaskSnapshot) =>  {
+        // upload in progress
+        const snap = snapshot;
+        upload.progress = (snap.bytesTransferred / snap.totalBytes) * 100
+      },
+      (error) => {
+        console.log(error);  // upload failed
+      },
+      () => {
+        // upload success
+        if (uploadTask.snapshot.downloadURL) {
+          upload.url = uploadTask.snapshot.downloadURL;
+          upload.name = upload.file.name;
+          
+
+          this.uploadfile = upload.url;
+          this.additem();
+          return;
+        } else {
+          console.error('No download URL!');
+        }
+      },
+    );
+    } // end of pushUpload
 
   uploadSingle() {
     const file = this.selectedFiles;
-    if (file && file.length === 1) {
-      this.currentUpload = new Upload(file.item(0));
-      this.upSvc.pushUpload(this.currentUpload);
-    } else {
-      console.error('No file found!');
-    }
-  }
+   // if (file && file.length === 1) {
+   //   this.currentUpload = new Upload(file.item(0));
+   //   this.pushUpload(this.currentUpload);
 
-  uploadMulti() {
-    const files = this.selectedFiles;
-    if (!files || files.length === 0) {
-      console.error('No Multi Files found!');
-      return;
-    }
-
-    Array.from(files).forEach((file) => {
-      this.currentUpload = new Upload(file);
-      this.upSvc.pushUpload(this.currentUpload);
-    });
+   // } else {
+      //console.error('No file found!');
+   // }
   }
 
   onSubmit(){
-    this.msg = "";
-    this.msg2 = "";
+    const file = this.selectedFiles;
 
     if(this.item.title == ''){
-      this.msg = "Please fill in the title";
       alert("Please fill in the title");
     }else if(this.item.description == ''){
-      this.msg = "Please fill in the Descripton";
       alert("Please fill in the Descripton");
     }else if(this.item.permissions == null){
-      this.msg = "Please select the permissions";
       alert("Please select the permissions");
     }
     else{
-      
-      const files = this.selectedFiles;
-      const file = this.selectedFiles;
-
-        if (!files || files.length === 0) {
-        console.error('No files in this post');
-      }else if (file && file.length === 1){
-        this.uploadSingle();
-      }else{
-        this.uploadMulti();
+         if (file && file.length === 1) {
+         this.currentUpload = new Upload(file.item(0));
+         this.pushUpload(this.currentUpload);       
       }
-                 
-        
-       
+    }
+  }
 
 
+  additem(){
 
-       this.msg = "";
        this.item.time = this.date+'';
        this.item.adminposted = this.user;
-       this.item.url = this.currentUpload.file.name;
-       //this.item.name = this.currentUpload.file.name;
-     this.msg2 = "Posted to firebase!";
-           alert("Posted to firebase!");
-     this.itemService.addItem(this.item);
-    }
+       this.item.name =this.currentUpload.file.name;
+       this.item.url =this.uploadfile; 
 
+      console.log(this.currentUpload.file);
+     
+      this.itemService.addItem(this.item);
+      alert("Posted to firebase!");
   }
 
 

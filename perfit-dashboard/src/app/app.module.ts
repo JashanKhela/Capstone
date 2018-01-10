@@ -33,7 +33,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseApp } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import { MainuploadComponent } from './mainupload/mainupload.component';
-import { CreatenotificationComponent } from './createnotification/createnotification.component';
 
 
 export const firebaseConfig = {
@@ -68,11 +67,6 @@ const appRoutes:Routes = [
     component: MainuploadComponent
   },
  {
-    path: 'createnotification',
-    canActivate: [AuthguardGuard],
-    component: CreatenotificationComponent
-  },
-  {
     path: 'logout',
     component: LogoutComponent
   }
@@ -89,7 +83,6 @@ const appRoutes:Routes = [
     UploaderComponent,
     LogoutComponent,
     MainuploadComponent,
-    CreatenotificationComponent,
 
   ],
   imports: [

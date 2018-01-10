@@ -26,6 +26,13 @@ h1{
     font-size: 40px;
 }
 
+h6{
+	color: grey;
+	padding-top: 5px;
+    text-align: center;
+    font-size: 40px;
+}
+
 .buttons{
 	border: 3px solid #; 
 	float: right;

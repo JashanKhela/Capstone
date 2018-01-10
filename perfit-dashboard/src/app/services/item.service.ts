@@ -6,20 +6,28 @@ import * as firebase from 'firebase';
 
 import { Item } from '../models/item';
 import { Upload } from '../models/upload';
+import { CookieService } from 'angular2-cookie/core';
 
 
 @Injectable()
 export class ItemService{
 	
+
+	item: Item = {
+  		title: '',
+  		description: '',
+    	url: '',
+  	}
 	// path for the files
   	basePath = 'uploads';
 	
+	urltest = '';
 
 	itemsCollection: AngularFirestoreCollection<Item>;
 	items: Observable<Item[]>;
 	itemDoc: AngularFirestoreDocument<Item>;
 
-	constructor(public afs: AngularFirestore){
+	constructor(private cookieService:CookieService, public afs: AngularFirestore){
 		//returns the collection as an observable
 		//this.items = this.afs.collection('items').valueChanges();
 
@@ -35,7 +43,6 @@ export class ItemService{
 		});
 		
 	}
-
 	
 	getItems(){
 		return this.items;
@@ -50,49 +57,17 @@ export class ItemService{
 		this.itemDoc.delete();
 	}
 
-
 	updateItem(item: Item){
 		this.itemDoc = this.afs.doc(`items/${item.id}`);
 		this.itemDoc.update(item);
 	}
 
-	// Uploads the files to the storage bucket
-  	public pushUpload(upload: Upload) {
+	deleteFileStorage(name: string) {
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    storageRef.child(`${this.basePath}/${name}`).delete()
+    }
 
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot: firebase.storage.UploadTaskSnapshot) =>  {
-        // upload in progress
-        const snap = snapshot;
-        upload.progress = (snap.bytesTransferred / snap.totalBytes) * 100
-      },
-      (error) => {
-        // upload failed
-        console.log(error);
-      },
-      () => {
-        // upload success
-        if (uploadTask.snapshot.downloadURL) {
-          upload.url = uploadTask.snapshot.downloadURL;
-          upload.name = upload.file.name;
-          // this.saveFileData(upload);
-          // reference firestore here!!!!!
-       
-          return;
-        } else {
-          console.error('No download URL!');
-        }
-      },
-    );
-  	} // end of pushUpload
+ 
 
-  	/*
-	 // Writes the file details to the realtime db
- 		private saveFileData(upload: Upload) {
-    	this.db.list(`${this.basePath}/`).push(upload);
-  		}
-  	*/
-
-
+//https://firebasestorage.googleapis.com/v0/b/perfitdental-7951d.appspot.com/o/uploads%2FIMG_2246.JPG?alt=media&token=1462a689-71e8-4e49-a554-f7255952b54f
 }

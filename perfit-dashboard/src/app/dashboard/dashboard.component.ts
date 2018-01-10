@@ -13,13 +13,26 @@ import { FileuploadService } from '../services/fileupload.service';
 })
 export class DashboardComponent implements OnInit {
  
+
+  basePath = 'uploads';
   items: Item[];
   editState: boolean = false;
   itemToEdit: Item;
   convertedText: string;
+  imageurl: any;
+  name:string;
 
+  item: Item = {
+    title: '',
+    description: '',
+    url: '',
+    name: '',
+  }
 
-  constructor(private cookieService:CookieService, private itemService: ItemService, private md:MarkdownService) {
+  constructor(
+    private cookieService:CookieService, 
+    private itemService: ItemService, 
+    private md:MarkdownService) {
 
    }
 
@@ -28,6 +41,8 @@ export class DashboardComponent implements OnInit {
 		this.itemService.getItems().subscribe(items => {
 			this.items = items;
 		})
+
+
   }
 
 
@@ -46,8 +61,29 @@ export class DashboardComponent implements OnInit {
   deleteItem(event,item: Item){
     this.clearState();
     this.itemService.deleteItem(item);
-     alert("post deleted!");
+    alert("post deleted!");
+    
+    this.deleteFileStorage(item);      
+
+    //this.deleteFileStorage("IMG_2227.JPG");      
   }
+
+  deleteFileStorage(item: Item) {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${this.basePath}/${item.name}`).delete()
+
+    alert(item.name);
+    }
+
+
+  ddeleteFileStorage(event,item: Item) {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${this.basePath}/${item.name}`).delete()
+
+    alert(item.name);
+    }
+
+
 
   editItem(event,item: Item){
     this.editState = true;
