@@ -8,6 +8,8 @@
 .outer-header{
 	background-color: #414141;
 	padding-bottom: 1em;
+	min-width: 50em;
+	width: 100%;
 }
 
 p{
@@ -20,7 +22,6 @@ p{
 
 .img1{
 	float: left;
-	
 }
 
 .menu ul li {
@@ -37,3 +38,6 @@ p{
 	color: rgb(155, 252, 27);
 }
 
+.usermsg{
+	width: 20em;
+}

@@ -18,12 +18,20 @@
         <textarea class="description" type="text" name="description" placeholder="Add description" (keyup)="updateOutput($event.target.value)" [(ngModel)]="item.description" ></textarea>
       </div>
 
-
       <div class="">
        <label>Permissions</label>
        <select type="text" placeholder="Add Datatype" [(ngModel)]="item.permissions" name="permissions">
        <option selected="selected" >Everyone</option>
        <option>Dentists/Doctors only</option>
+       </select>
+       </div>
+
+       <div class="">
+       <label>Datatype</label>
+       <select type="text" placeholder="Add Datatype" [(ngModel)]="item.datatype" name="permissions">
+       <option selected="selected" >Image</option>
+       <option>Video</option>
+       <option>PDF</option>
        </select>
        </div>
 

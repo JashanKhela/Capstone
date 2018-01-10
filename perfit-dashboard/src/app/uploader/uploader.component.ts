@@ -106,6 +106,8 @@ export class UploaderComponent implements OnInit {
       alert("Please fill in the Descripton");
     }else if(this.item.permissions == null){
       alert("Please select the permissions");
+    }else if(this.item.datatype == null){
+      alert("Please select the datatype");
     }
     else{
          if (file && file.length === 1) {

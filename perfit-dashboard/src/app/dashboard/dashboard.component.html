@@ -7,9 +7,19 @@
   		<li class="collection-item">
 			
 			<h1 class="item-title">{{ item.title }}</h1> <hr>
-			<br><h3><div class="description"> {{ updateOutput(item.description) }}</div></h3>
+			  
+			  <div *ngIf="item.datatype == 'Image'; ">
+				<img class="fileimage" src="{{ item.url	}}"> 
+			  </div>
+			  
+			  <div *ngIf="item.datatype == 'Video'; ">
+				<video class="fileimage2" width="500" height="500" controls>
+	 			 <source src="{{ item.url }}" type="video/mp4">
+				</video>			  
+			  </div>
 
-						<br><h3><div class="description" [innerHtml]= "convertedText"> </div></h3>
+			<br><h3><div class="description"> {{ updateOutput(item.description) }}</div></h3>
+			<br><h3><div class="description" [innerHtml]= "convertedText"> </div></h3>
 			<div class="info">
 				<!--<br> <b>Datatype: </b> {{ item.datatype }}-->
 				<br> <b>File name: </b> {{ item.name }}

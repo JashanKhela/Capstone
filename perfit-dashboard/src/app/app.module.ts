@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { RouterModule, Routes} from '@angular/router';
-import { SimpleNotificationsModule } from 'angular2-notifications';
 
 //components
 import { AppComponent } from './app.component';
@@ -14,9 +13,7 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { LogoutComponent } from './logout/logout.component';
 
 
-import {PushmessageComponent} from './pushmessage/pushmessage.component';
-import { UploadImageComponent } from './upload-image/upload-image.component';
-
+///import {PushmessageComponent} from './pushmessage/pushmessage.component';
 
 //services
 import { environment } from '../environments/environment';
@@ -76,11 +73,11 @@ const appRoutes:Routes = [
     canActivate: [AuthguardGuard],
     component: MainuploadComponent
   },
-  {
-    path: 'pushmessage',
-    canActivate: [AuthguardGuard],
-    component: PushmessageComponent
-  },
+  //{
+  //  path: 'pushmessage',
+  //  canActivate: [AuthguardGuard],
+  //  component: PushmessageComponent
+  //},
   {
     path: 'logout',
     component: LogoutComponent
@@ -98,8 +95,7 @@ const appRoutes:Routes = [
     UploaderComponent,
     LogoutComponent,
     MainuploadComponent,
-    UploadImageComponent,
-    PushmessageComponent,    
+//    PushmessageComponent,    
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
