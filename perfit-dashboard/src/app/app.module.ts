@@ -13,6 +13,11 @@ import { FooterComponent } from './footer/footer.component';
 import { UploaderComponent } from './uploader/uploader.component';
 import { LogoutComponent } from './logout/logout.component';
 
+
+import {PushmessageComponent} from './pushmessage/pushmessage.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+
+
 //services
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
@@ -33,6 +38,11 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseApp } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import { MainuploadComponent } from './mainupload/mainupload.component';
+
+
+// Http client (used for sending POST request for push ~Eric)
+import {HttpClientModule} from '@angular/common/http';
+
 
 
 export const firebaseConfig = {
@@ -66,7 +76,12 @@ const appRoutes:Routes = [
     canActivate: [AuthguardGuard],
     component: MainuploadComponent
   },
- {
+  {
+    path: 'pushmessage',
+    canActivate: [AuthguardGuard],
+    component: PushmessageComponent
+  },
+  {
     path: 'logout',
     component: LogoutComponent
   }
@@ -83,7 +98,8 @@ const appRoutes:Routes = [
     UploaderComponent,
     LogoutComponent,
     MainuploadComponent,
-
+    UploadImageComponent,
+    PushmessageComponent,    
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -92,7 +108,8 @@ const appRoutes:Routes = [
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [AuthguardGuard,CookieService, AuthService,ItemService,MarkdownService, FileuploadService],
   bootstrap: [AppComponent]

@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-#topic{
-font-size: 20em;
-}
-
-#news{
-    overflow-y: scroll
-}
-
-#womantext{
-    text-decoration-color: black;
-    font-size: 30em;
-    font-weight: bold;
-    margin-left:30%;
-    margin-top: 20%;
-}
-=======
 button {
     font-size: 15;
     horizontal-align: center;
@@ -55,4 +38,3 @@ button {
 .sideLightGrayLabel {
     background-color: lightgray;
 }
->>>>>>> 7a7e72761adb01e6beac45cd6bde05a5dcad27f9

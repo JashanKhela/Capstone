@@ -5,7 +5,7 @@ import * as ImageModule from "tns-core-modules/ui/image";
 import { Image } from "tns-core-modules/ui/image";
 import { OnInit } from '@angular/core';
 import { Info} from './info';
-//import {Input, ChangeDetectionStrategy} from '@angular/core';
+
 
 
 
