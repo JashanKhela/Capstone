@@ -6,12 +6,14 @@
   	<ul *ngFor="let item of items" class="collection">
   		<li class="collection-item">
 			
-			<h1 class="item-title">{{ item.title }}</h1> 
-			<br><h3><div class="description"> {{ item.description }}</div></h3>
+			<h1 class="item-title">{{ item.title }}</h1> <hr>
+			<br><h3><div class="description"> {{ updateOutput(item.description) }}</div></h3>
+
+						<br><h3><div class="description" [innerHtml]= "convertedText"> </div></h3>
 			<div class="info">
 				<!--<br> <b>Datatype: </b> {{ item.datatype }}-->
+				<br> <b>File name: </b> {{ item.name }}
 				<br> <b>Postedby: </b> {{ item.adminposted }}
-				<!--<br> <b>File: </b> {{ item.file }} -->
 				<br> <b>Permissions: </b> {{ item.permissions }}
 				<br> <b>Posted on: </b> {{ item.time }}
 				<br> <b>Post id: </b> {{ item.id }}
@@ -45,6 +47,7 @@
 			        	<div class="buttons">
 						<button type="submit" value="Update Item" class="">Update Post</button>
 			        	<button (click)="deleteItem($event,item)"  class="">Delete Post</button>
+
 			        	</div>
 			        	
 				</form>

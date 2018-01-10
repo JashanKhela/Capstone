@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/core';
 import { FormsModule} from '@angular/forms';
-
 import { ItemService } from '../services/item.service';
 import { Item } from '../models/item';
+import { MarkdownService } from '../services/markdown.service';
+import { Upload } from '../models/upload';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-uploader',
@@ -13,44 +16,117 @@ import { Item } from '../models/item';
 
 export class UploaderComponent implements OnInit {
  
-   user:string;
-   msg = '';
-   msg2 = '';
-   date = new Date();
+   basePath = 'uploads';
+   uploadfile = '';
 
+   user:string;
+   date = new Date();
+   convertedText: string;
+   
+   fileurl = '';
+   filename = '';
+  
   item: Item = {
   	title: '',
   	description: '',
+    url: '',
   }
+  
+  formsubmit: boolean;
+  selectedFiles: FileList | null;
+  currentUpload: Upload;
 
-
-  constructor(private itemService: ItemService,private cookieService:CookieService) {
+  constructor(
+    private itemService: ItemService,
+    private cookieService:CookieService, 
+    private md:MarkdownService,
+    private upSvc: ItemService,
+    ) {
     this.user = this.cookieService.get('username'); 
   }
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  // updates markup text
+  updateOutput(mdText: string){
+    this.convertedText = this.md.converted(mdText);
+  }
+
+  detectFiles($event: Event) {
+      this.selectedFiles = ($event.target as HTMLInputElement).files;
+  }
+  
+  public pushUpload(upload: Upload) {
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot: firebase.storage.UploadTaskSnapshot) =>  {
+        // upload in progress
+        const snap = snapshot;
+        upload.progress = (snap.bytesTransferred / snap.totalBytes) * 100
+      },
+      (error) => {
+        console.log(error);  // upload failed
+      },
+      () => {
+        // upload success
+        if (uploadTask.snapshot.downloadURL) {
+          upload.url = uploadTask.snapshot.downloadURL;
+          upload.name = upload.file.name;
+          
+
+          this.uploadfile = upload.url;
+          this.additem();
+          return;
+        } else {
+          console.error('No download URL!');
+        }
+      },
+    );
+    } // end of pushUpload
+
+  uploadSingle() {
+    const file = this.selectedFiles;
+   // if (file && file.length === 1) {
+   //   this.currentUpload = new Upload(file.item(0));
+   //   this.pushUpload(this.currentUpload);
+
+   // } else {
+      //console.error('No file found!');
+   // }
   }
 
   onSubmit(){
-    this.msg = "";
-    
+    const file = this.selectedFiles;
+
     if(this.item.title == ''){
-      this.msg = "Please fill in the title";
+      alert("Please fill in the title");
     }else if(this.item.description == ''){
-      this.msg = "Please fill in the Descripton";
+      alert("Please fill in the Descripton");
     }else if(this.item.permissions == null){
-      this.msg = "Please select the permissions";
+      alert("Please select the permissions");
     }
     else{
-       this.msg = "";
+         if (file && file.length === 1) {
+         this.currentUpload = new Upload(file.item(0));
+         this.pushUpload(this.currentUpload);       
+      }
+    }
+  }
+
+
+  additem(){
+
        this.item.time = this.date+'';
        this.item.adminposted = this.user;
+       this.item.name =this.currentUpload.file.name;
+       this.item.url =this.uploadfile; 
 
-     this.msg2 = "Posted to firebase!";
-     this.itemService.addItem(this.item);
-    }
-
+      console.log(this.currentUpload.file);
+     
+      this.itemService.addItem(this.item);
+      alert("Posted to firebase!");
   }
 
 

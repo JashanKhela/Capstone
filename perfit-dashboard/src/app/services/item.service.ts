@@ -2,17 +2,32 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase';
 
 import { Item } from '../models/item';
+import { Upload } from '../models/upload';
+import { CookieService } from 'angular2-cookie/core';
 
 
 @Injectable()
 export class ItemService{
+	
+
+	item: Item = {
+  		title: '',
+  		description: '',
+    	url: '',
+  	}
+	// path for the files
+  	basePath = 'uploads';
+	
+	urltest = '';
+
 	itemsCollection: AngularFirestoreCollection<Item>;
 	items: Observable<Item[]>;
 	itemDoc: AngularFirestoreDocument<Item>;
 
-	constructor(public afs: AngularFirestore){
+	constructor(private cookieService:CookieService, public afs: AngularFirestore){
 		//returns the collection as an observable
 		//this.items = this.afs.collection('items').valueChanges();
 
@@ -28,8 +43,7 @@ export class ItemService{
 		});
 		
 	}
-
-
+	
 	getItems(){
 		return this.items;
 	}
@@ -43,12 +57,17 @@ export class ItemService{
 		this.itemDoc.delete();
 	}
 
-
 	updateItem(item: Item){
 		this.itemDoc = this.afs.doc(`items/${item.id}`);
 		this.itemDoc.update(item);
 	}
 
+	deleteFileStorage(name: string) {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${this.basePath}/${name}`).delete()
+    }
 
+ 
 
+//https://firebasestorage.googleapis.com/v0/b/perfitdental-7951d.appspot.com/o/uploads%2FIMG_2246.JPG?alt=media&token=1462a689-71e8-4e49-a554-f7255952b54f
 }

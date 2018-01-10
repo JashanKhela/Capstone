@@ -21,8 +21,6 @@ export class LoginpageComponent implements OnInit {
   ngOnInit() {
         this.cookieService.put('loggedin', 'false');
         console.log('the cookie is',this.cookieService.get('loggedin'));
-
-
   }
 
   public validated(){
