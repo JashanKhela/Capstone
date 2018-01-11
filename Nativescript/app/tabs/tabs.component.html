@@ -18,7 +18,6 @@
 
 
     <StackLayout *tabItem="{title: 'Info'}">   
-        <StackLayout>   
                 <ListView [items]= "News" class = "list-group" [class.selected]="item === selectedInfo"(tap)="onSelect(item)">
                         <ng-template let-item="item" >
                                 <StackLayout orientation="horizontal">
@@ -33,10 +32,9 @@
                         </ListView>
                 
                         <app-news-detail [item]="selectedInfo"></app-news-detail>
-                
-        </StackLayout>
     </StackLayout>
     <StackLayout *tabItem="{title: 'Providers'}">
         <Image></Image>
     </StackLayout>
 </TabView>
+

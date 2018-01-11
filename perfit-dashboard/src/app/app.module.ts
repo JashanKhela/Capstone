@@ -13,7 +13,9 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { LogoutComponent } from './logout/logout.component';
 
 
-//
+
+import {PushmessageComponent} from './pushmessage/pushmessage.component';
+
 
 
 //services
@@ -95,8 +97,9 @@ const appRoutes:Routes = [
     FooterComponent,
     UploaderComponent,
     LogoutComponent,
-    MainuploadComponent,
-//    PushmessageComponent,    
+    MainuploadComponent,    
+    PushmessageComponent,    
+
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
