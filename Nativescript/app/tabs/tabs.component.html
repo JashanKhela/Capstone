@@ -33,8 +33,33 @@
                 
                         <app-news-detail [item]="selectedInfo"></app-news-detail>
     </StackLayout>
-    <StackLayout *tabItem="{title: 'Providers'}">
-        <Image></Image>
-    </StackLayout>
+    <GridLayout *tabItem="{title: 'Providers'}">
+            <Gradient height="100%" direction="to bottom" colors="#444, #000" [class.p-20]="isIOS">
+                    <ContentView [@flyInOut]="'in'" height="100%" width="100%" borderRadius="20">
+                      <Mapbox
+                          accessToken="sk.eyJ1IjoiZWRkeXZlcmJydWdnZW4iLCJhIjoia1JpRW82NCJ9.OgnvpsKzB3GJhzyofQNUBw"
+                          mapStyle="traffic_day"
+                          latitude="42.624189"
+                          longitude="23.372106"
+                          zoomLevel="8"
+                          delay="450"
+                          showUserLocation="true"
+                          hideCompass="false"
+                          disableZoom="false"
+                          disableRotation="false"
+                          disableScroll="false"
+                          disableTilt="false"
+                          (mapReady)="onMapReady($event)">
+                      </Mapbox>
+                    </ContentView>
+                  </Gradient>
+                  <FAB
+                      [@from-right]="'in'"
+                      (tap)="fabTapped()"
+                      icon="res://ic_add_white"
+                      rippleColor="#f1f1f1"
+                      class="fab">
+                </FAB>
+    </GridLayout>
 </TabView>
 
