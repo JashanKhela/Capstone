@@ -5,6 +5,8 @@ import { ItemService } from '../services/item.service';
 import { Item } from '../models/item';
 import { MarkdownService } from '../services/markdown.service';
 import { FileuploadService } from '../services/fileupload.service';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 
 @Component({
   selector: 'app-dashboard',

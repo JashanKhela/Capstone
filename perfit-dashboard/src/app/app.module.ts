@@ -13,7 +13,8 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { LogoutComponent } from './logout/logout.component';
 
 
-///import {PushmessageComponent} from './pushmessage/pushmessage.component';
+//
+
 
 //services
 import { environment } from '../environments/environment';

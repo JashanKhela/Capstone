@@ -18,6 +18,12 @@
 				</video>			  
 			  </div>
 
+			  <div class="pdf" *ngIf="item.datatype == 'PDF'; ">
+			  	<a class="pdf" href="{{ item.url }}">{{ item.name }}</a>
+			  </div>
+		
+
+
 			<br><h3><div class="description"> {{ updateOutput(item.description) }}</div></h3>
 			<br><h3><div class="description" [innerHtml]= "convertedText"> </div></h3>
 			<div class="info">
