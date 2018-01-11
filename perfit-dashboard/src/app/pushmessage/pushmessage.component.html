@@ -1,0 +1,30 @@
+
+<app-header></app-header>
+
+<body>
+  <div class="container">
+    <div class="">
+      <form (ngSubmit) ="sendPushNotification()" class="">  
+              <div class="">
+                <label>Title</label>
+                <textarea type="text" placeholder="Add title" [(ngModel)]="title" name="title"></textarea>
+              </div>              
+              <div class="">
+                <label>Description</label>
+                <textarea class="description" type="text" placeholder="Add Description" [(ngModel)]="msg" name="msg"></textarea>
+              </div> 
+              <div class ="">
+                <label>User Type</label>
+                <select [(ngModel)]="selectedOption" (ngModelChange)="onChange($event)" name ="selectOptions" >
+                  <option *ngFor="let o of options" [ngValue]="o"> {{o.name}} </option>
+                </select>
+              </div>
+              <div class="">
+                <label>Choose color</label>
+                <input type="color" [(ngModel)]="color" name="color" value='#bdf105'>
+              </div>
+              <input type="submit" class="button">              
+            </form>
+          </div>
+        </div>        
+        </body>

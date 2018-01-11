@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { RouterModule, Routes} from '@angular/router';
-import { SimpleNotificationsModule } from 'angular2-notifications';
 
 //components
 import { AppComponent } from './app.component';
@@ -15,7 +14,6 @@ import { LogoutComponent } from './logout/logout.component';
 
 
 import {PushmessageComponent} from './pushmessage/pushmessage.component';
-import { UploadImageComponent } from './upload-image/upload-image.component';
 
 
 //services
@@ -97,8 +95,7 @@ const appRoutes:Routes = [
     FooterComponent,
     UploaderComponent,
     LogoutComponent,
-    MainuploadComponent,
-    UploadImageComponent,
+    MainuploadComponent,    
     PushmessageComponent,    
   ],
   imports: [
