@@ -6,6 +6,7 @@ registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);
 
+
 // firebase.subscribeToTopic("news");
 
 // firebase.getCurrentPushToken().then((token: string) => {

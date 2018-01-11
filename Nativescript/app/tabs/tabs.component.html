@@ -18,7 +18,6 @@
 
 
     <StackLayout *tabItem="{title: 'Info'}">   
-        <StackLayout>   
                 <ListView [items]= "News" class = "list-group" [class.selected]="item === selectedInfo"(tap)="onSelect(item)">
                         <ng-template let-item="item" >
                                 <StackLayout orientation="horizontal">
@@ -33,8 +32,6 @@
                         </ListView>
                 
                         <app-news-detail [item]="selectedInfo"></app-news-detail>
-                
-        </StackLayout>
     </StackLayout>
     <GridLayout *tabItem="{title: 'Providers'}">
             <Gradient height="100%" direction="to bottom" colors="#444, #000" [class.p-20]="isIOS">
@@ -65,3 +62,4 @@
                 </FAB>
     </GridLayout>
 </TabView>
+

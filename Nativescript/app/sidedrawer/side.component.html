@@ -30,7 +30,7 @@
                   ios:horizontalAlignment="center"
                   android:horizontalAlignment="left">          
                   <Button text="Menu" (tap)="openDrawer()" class="drawerContentButton"></Button>
-                  <searchbar></searchbar>
+                  <SearchBar hint="Search Here" (loaded)="onSearchBarLoaded($event)" ></SearchBar>
                 </StackLayout>
               </ActionBar>
         <tabs></tabs>
