@@ -4,6 +4,7 @@ import { AppModule } from "./app.module";
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);
 
+
 // firebase.subscribeToTopic("news");
 
 // firebase.getCurrentPushToken().then((token: string) => {
