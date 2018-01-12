@@ -13,7 +13,9 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { LogoutComponent } from './logout/logout.component';
 
 
+
 import {PushmessageComponent} from './pushmessage/pushmessage.component';
+
 
 
 //services
@@ -74,11 +76,11 @@ const appRoutes:Routes = [
     canActivate: [AuthguardGuard],
     component: MainuploadComponent
   },
-  {
-    path: 'pushmessage',
-    canActivate: [AuthguardGuard],
-    component: PushmessageComponent
-  },
+  //{
+  //  path: 'pushmessage',
+  //  canActivate: [AuthguardGuard],
+  //  component: PushmessageComponent
+  //},
   {
     path: 'logout',
     component: LogoutComponent
@@ -97,6 +99,7 @@ const appRoutes:Routes = [
     LogoutComponent,
     MainuploadComponent,    
     PushmessageComponent,    
+
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

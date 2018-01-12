@@ -1,7 +1,8 @@
 .footer {
 
     height:4em; 
-    width: 100%; 
+    min-width: 50em;
+    width: 100%;
     background-image: none;
     background-repeat: repeat;
     background-attachment: scroll;
@@ -9,7 +10,7 @@
     position: relative;
     bottom: 0pt;
     left: 0pt;
-    background-color: rgba(0,0,0,0.78);
+    background-color: #414141;
 
 }   
 
