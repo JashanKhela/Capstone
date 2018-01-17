@@ -18,14 +18,14 @@
 
 
     <StackLayout *tabItem="{title: 'Info'}">   
-                <ListView [items]= "News" class = "list-group" [class.selected]="item === selectedInfo"(tap)="onSelect(item)">
+                <ListView  [items]="news$ | async" class = "list-group">
                         <ng-template let-item="item" >
                                 <StackLayout orientation="horizontal">
                                  <Image width="200px" height="300px" [src]="item.pic" id = "image"></Image>
                             <StackLayout class="list-group-item" >
-                              <Label [text]="item.Topic" class="list-group-item-heading" id = "topic"></Label>
-                              <Label [text]="'Created by: ' + item.author"  class="list-group-item-text" ></Label>
-                                <Label  [text]="item.prev"  class="list-group-item-text" id = "prev"></Label>
+                              <Label [text]="item.title" class="list-group-item-heading" id = "topic"></Label>
+                              <Label [text]="'Created by: ' + item.adminposted"  class="list-group-item-text" ></Label>
+                                <Label  [text]="item.description"  class="list-group-item-text" id = "prev"></Label>
                                 </StackLayout>
                                 </StackLayout>
                             </ng-template>
